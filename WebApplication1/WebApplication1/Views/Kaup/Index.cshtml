@@ -1,0 +1,34 @@
+﻿@model WebApplication1.ViewModels.KaupCalculation
+
+@{
+    ViewBag.Title = "カウプ指数";
+}
+
+@using (Html.BeginForm("Calculation", "Kaup", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Form.Age)
+        @Html.EditorFor(m => m.Form.Age, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Form.Weight)
+        @Html.EditorFor(m => m.Form.Weight, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Form.Height)
+        @Html.EditorFor(m => m.Form.Height, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <button type="submit" class="btn-sm btn-info">send</button>
+}
+
+@if (Model.Result.Kaup > 0)
+{
+    <text>カウプ指数：@Model.Result.Kaup（@Model.Result.Subject）<br></text>
+
+    foreach (var indication in Model.Result.IndicationList)
+    {
+        <text>
+        @indication.Subject： @indication.LowerWeight　～ @indication.UpperWeight<br>
+        </text>
+    }
+}
