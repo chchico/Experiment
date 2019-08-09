@@ -23,12 +23,20 @@
 
 @if (Model.Result.Kaup > 0)
 {
-    <text>カウプ指数：@Model.Result.Kaup（@Model.Result.Subject）<br></text>
-
-    foreach (var indication in Model.Result.IndicationList)
-    {
-        <text>
-        @indication.Subject： @indication.LowerWeight　～ @indication.UpperWeight<br>
+    <text>カウプ指数：@Html.DisplayFor(m => m.Result.Kaup)（@Model.Result.Subject）<br></text>
+    <table>
+        @for (var i = 0; i < Model.Result.IndicationList.Count; i++)
+        {
+            var indication = Model.Result.IndicationList[i];
+            <text>
+        <tr>
+            <td> @indication.Subject</td>
+            <td>：</td>
+            <td class="text-right">@Html.DisplayFor(m => m.Result.IndicationList[i].LowerWeight)</td>
+            <td>～</td>
+            <td class="text-right">@Html.DisplayFor(m => m.Result.IndicationList[i].UpperWeight)</td>
+        </tr>
         </text>
-    }
+        }
+    </table>
 }

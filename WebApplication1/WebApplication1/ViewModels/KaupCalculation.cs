@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 
 namespace WebApplication1.ViewModels
 {
@@ -24,10 +24,16 @@ namespace WebApplication1.ViewModels
         public class CalculationForm
         {
 
+            [Display(Name = "年齢")]
+            [Required(ErrorMessage = "年齢を入力してください")]
             public int Age { get; set; }
 
+            [Display(Name = "体重")]
+            [Required(ErrorMessage = "体重を入力してください")]
             public float Weight { get; set; }
 
+            [Display(Name = "身長")]
+            [Required(ErrorMessage = "身長を入力してください")]
             public float Height { get; set; }
 
 
@@ -51,10 +57,10 @@ namespace WebApplication1.ViewModels
                     switch (form.Age)
                     {
                         case int n when n < 6:
-                            kaup = Math.Round(form.Weight / Math.Pow(form.Height, 2.0) * Math.Pow(10, 4.0), 2);
+                            kaup = form.Weight / Math.Pow(form.Height, 2.0) * Math.Pow(10, 4.0);
                             break;
                         case int n when 6 <= n && n < 16:
-                            kaup = Math.Round(form.Weight / Math.Pow(form.Height, 3.0) * Math.Pow(10, 7.0), 2);
+                            kaup = form.Weight / Math.Pow(form.Height, 3.0) * Math.Pow(10, 7.0);
                             break;
                         case int n:
                         default:
@@ -71,6 +77,7 @@ namespace WebApplication1.ViewModels
 
             public List<Indication> IndicationList { get; private set; }
 
+            [DisplayFormat(DataFormatString = "{0:f}", ApplyFormatInEditMode = true)]
             public double Kaup { get; private set; }
 
             public string Subject { get; private set; }
@@ -90,19 +97,19 @@ namespace WebApplication1.ViewModels
                 switch (age)
                 {
                     case int n when n < 6:
-                        lowerWeight = Math.Round(lower * Math.Pow(height, 2.0) / Math.Pow(10, 4.0), 2);
-                        upperWeight = Math.Round(upper * Math.Pow(height, 2.0) / Math.Pow(10, 4.0), 2);
+                        lowerWeight = lower * Math.Pow(height, 2.0) / Math.Pow(10, 4.0);
+                        upperWeight = upper * Math.Pow(height, 2.0) / Math.Pow(10, 4.0);
                         break;
                     case int n when 6 <= n && n < 16:
-                        lowerWeight = Math.Round(lower * Math.Pow(height, 3.0) / Math.Pow(10, 7.0), 2);
-                        upperWeight = Math.Round(upper * Math.Pow(height, 3.0) / Math.Pow(10, 7.0), 2);
+                        lowerWeight = lower * Math.Pow(height, 3.0) / Math.Pow(10, 7.0);
+                        upperWeight = upper * Math.Pow(height, 3.0) / Math.Pow(10, 7.0);
                         break;
                     case int n:
                     default:
                         break;
                 }
-                this.LowerWeight = lowerWeight;
-                this.UpperWeight = upperWeight;
+                this.LowerWeight = lowerWeight > 0 ? lowerWeight : (double?)null;
+                this.UpperWeight = upperWeight > 0 ? upperWeight : (double?)null;
             }
 
             public string Subject { get; set; }
@@ -113,9 +120,11 @@ namespace WebApplication1.ViewModels
             public int UpperIndex { get; set; }
 
 
-            public double LowerWeight { get; private set; }
+            [DisplayFormat(DataFormatString = "{0:f}kg 以上", ApplyFormatInEditMode = true)]
+            public double? LowerWeight { get; private set; }
 
-            public double UpperWeight { get; private set; }
+            [DisplayFormat(DataFormatString = "{0:f}kg 未満", ApplyFormatInEditMode = true)]
+            public double? UpperWeight { get; private set; }
         }
     }
 }
