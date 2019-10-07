@@ -1,6 +1,4 @@
-﻿
-function App() {
-
+﻿function App() {
     // useStateでツイート配列を取得する
     // 初期値は今まで通り
     const [tweets, setTweets] = React.useState([
@@ -20,8 +18,6 @@ function App() {
         }
     ]);
 
-    //http://neromiu.net/demodemo/programming/react-js-practice/
-
     // addTweet関数はuseCallbackで作成する
     // これも毎回作成していると重くなるので
     const addTweet = React.useCallback((tweet) => setTweets((prev) => [tweet, ...prev]), [setTweets]);
@@ -35,4 +31,4 @@ function App() {
 }
 
 const target = document.querySelector('#app');
-ReactDOM.render(<App url="/Content/ReactTest01/TweetData.json" />, target);
+ReactDOM.render(<App />, target);

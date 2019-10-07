@@ -1,0 +1,115 @@
+﻿@import "../../ress";
+
+body {
+    background: #efefef;
+}
+
+#wrapper {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#h1 {
+    padding: 10px;
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 6px;
+        border-radius: 3px;
+        background: #b6ff00;
+    }
+}
+
+#wrapContent {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#listFavorite {
+    flex-grow: 1;
+    max-width: 400px;
+    min-width: 280px;
+    margin-left: 20px;
+    padding: 10px;
+
+}
+
+#listEstate {
+    flex-grow: 2;
+    padding: 10px;
+
+    li {
+        display: block;
+        overflow: hidden;
+        margin: 0;
+        list-style: none;
+        text-indent: 0;
+        padding: 10px 0;
+        border-bottom: 1px solid #b6ff00;
+    }
+
+    .wrapEstateItem {
+        display: grid;
+        grid-template-columns: 6.0em 60px 1fr 2fr 1fr 1fr 50px;
+        grid-auto-flow: column;
+
+        .item {
+            padding: 5px;
+            border-right: 1px dashed #808080;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+}
+.favoriteOn,
+.favoriteOff {
+    $size: 24px;
+
+    display: inline-block;
+    position: relative;
+    width: $size;
+    height: $size;
+    line-height: $size - 2px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+.favoriteOn {
+    $color: rgb(29, 137, 255);
+    color: #fff;
+    background: $color;
+
+
+    &:hover {
+        background: rgba($color, 0.5);
+        color: $color;
+        border: 2px solid $color;
+    }
+}
+.favoriteOff {
+    $color: rgb(29, 137, 255);
+    background: #ffffff;
+    color: $color;
+    border: 2px solid $color;
+
+
+    &:hover {
+        color: #fff;
+        background: rgba($color, 0.5);
+    }
+}

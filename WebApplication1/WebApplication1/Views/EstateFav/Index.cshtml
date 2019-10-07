@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title>React Tutorial</title>
+
+    <link rel="stylesheet" href="~/Content/EstateFav/css/style.min.css">
+    <!-- React関係のライブラリの読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <!-- 自分で書くスクリプト
+
+
+    <script type="text/babel" src="~/Content/EstateFav/js/RenderFav.jsx" defer>
+    </script>
+    <script type="text/babel" src="~/Content/EstateFav/js/RenderEstate.jsx" defer>
+    </script> -->
+    <script type="text/babel" src="~/Content/EstateFav/js/Render.jsx" defer>
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1 id="h1">お気に入り不動産</h1>
+        <div id="content">
+        </div>
+    </div>
+</body>
+</html>
