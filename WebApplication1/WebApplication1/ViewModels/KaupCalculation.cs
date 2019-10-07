@@ -19,12 +19,13 @@ namespace WebApplication1.ViewModels
         }
 
         public CalculationForm Form { get; set; }
+
         public CalculationResult Result { get; set; }
 
         public class CalculationForm
         {
-
             [Display(Name = "年齢")]
+            [Range(0, 15, ErrorMessage = "16歳以上は対象外です")]
             [Required(ErrorMessage = "年齢を入力してください")]
             public int Age { get; set; }
 
@@ -35,8 +36,6 @@ namespace WebApplication1.ViewModels
             [Display(Name = "身長")]
             [Required(ErrorMessage = "身長を入力してください")]
             public float Height { get; set; }
-
-
         }
 
         public class CalculationResult
@@ -81,7 +80,6 @@ namespace WebApplication1.ViewModels
             public double Kaup { get; private set; }
 
             public string Subject { get; private set; }
-
         }
 
         public class Indication
@@ -109,6 +107,7 @@ namespace WebApplication1.ViewModels
                         break;
                 }
                 this.LowerWeight = lowerWeight > 0 ? lowerWeight : (double?)null;
+
                 this.UpperWeight = upperWeight > 0 ? upperWeight : (double?)null;
             }
 

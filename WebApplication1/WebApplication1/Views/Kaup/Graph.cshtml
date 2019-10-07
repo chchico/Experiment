@@ -1,0 +1,166 @@
+﻿@model WebApplication1.ViewModels.KaupGraph
+
+@{
+    ViewBag.Title = "カウプ指数";
+}
+
+@using (Html.BeginForm("Graph", "Kaup", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Forms[0].Age)
+        @Html.EditorFor(m => m.Forms[0].Age, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Forms[0].Age)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Forms[0].Weight)
+        @Html.EditorFor(m => m.Forms[0].Weight, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Forms[0].Weight)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Forms[0].Height)
+        @Html.EditorFor(m => m.Forms[0].Height, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Forms[0].Height)
+    </div>
+    <button type="submit" class="btn-sm btn-info">send</button>
+}
+
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+<script>
+    window.onload = function () {
+
+        var chart1 = new CanvasJS.Chart("chartContainer", {
+            theme: "light2",
+            title: {
+                text: "Daily Temperature Variation in Bengaluru - July 2017"
+            },
+            axisX: {
+                valueFormatString: "年齢"
+            },
+            axisY: {
+                title: ""
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                dockInsidePlotArea: true,
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "rangeArea",
+                markerSize: 0,
+                name: "Temperature Range",
+                showInLegend: true,
+                toolTipContent: "{x}<br><span style=\"color:#6D77AC\">{name}</span><br>Min: {y[1]} °C<br>Max: {y[0]} °C",
+                dataPoints: [
+                @for (var i = 0; i < 10; i++)
+                {
+                    <text>
+
+                    { x: new Date(2017, 6, @i), y: [@(30 + i), @(10 - i)] },
+
+                    </text>
+                }
+                ]
+            }]
+        });
+        chart1.render();
+        
+        var chart2 = new CanvasJS.Chart("chartContainer", {
+            theme: "light1",
+            title: {
+                text: "Daily Temperature Variation in Bengaluru - July 2017"
+            },
+            axisX: {
+                valueFormatString: "年齢"
+            },
+            axisY: {
+                title: ""
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                dockInsidePlotArea: true,
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "rangeArea",
+                markerSize: 0,
+                name: "Temperature Range",
+                showInLegend: true,
+                toolTipContent: "{x}<br><span style=\"color:#6D77AC\">{name}</span><br>Min: {y[1]} °C<br>Max: {y[0]} °C",
+                dataPoints: [
+                @for (var i = 0; i < 10; i++)
+                {
+                    <text>
+
+                    { x: new Date(2017, 7, @i), y: [@(20 + i), @(10 - i)] },
+
+                    </text>
+                }
+                ]
+            }]
+        });
+        chart2.render();
+        /*
+        addAverages();
+
+        function addAverages() {
+            var dps = [];
+            for (var i = 0; i < chart.options.data[0].dataPoints.length; i++) {
+                dps.push({
+                    x: chart.options.data[0].dataPoints[i].x,
+                    y: (chart.options.data[0].dataPoints[i].y[0] + chart.options.data[0].dataPoints[i].y[1]) / 2
+                });
+            }
+            chart.options.data.push({
+                type: "line",
+                name: "Average",
+                showInLegend: true,
+                markerType: "triangle",
+                markerSize: 0,
+                yValueFormatString: "##.0 °C",
+                dataPoints: dps
+            });
+            chart.render();
+        }
+        */
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+    }
+</script>
+@*
+    @if (Model.Result.Kaup > 0)
+    {
+        <text>カウプ指数：@Html.DisplayFor(m => m.Result.Kaup)（@Model.Result.Subject）<br></text>
+        <table>
+            @for (var i = 0; i < Model.Result.IndicationList.Count; i++)
+            {
+                var indication = Model.Result.IndicationList[i];
+                <text>
+                    <tr>
+                        <td> @indication.Subject</td>
+                        <td>：</td>
+                        <td class="text-right">@Html.DisplayFor(m => m.Result.IndicationList[i].LowerWeight)</td>
+                        <td>～</td>
+                        <td class="text-right">@Html.DisplayFor(m => m.Result.IndicationList[i].UpperWeight)</td>
+                    </tr>
+                </text>
+            }
+        </table>
+
+
+    }*@
