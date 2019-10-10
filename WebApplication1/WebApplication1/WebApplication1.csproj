@@ -45,32 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdvancedStringBuilder, Version=0.1.0.0, Culture=neutral, PublicKeyToken=e818a2fc08933ddb, processorArchitecture=MSIL">
-      <HintPath>..\packages\AdvancedStringBuilder.0.1.0\lib\net45\AdvancedStringBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="JavaScriptEngineSwitcher.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.Core.3.1.0\lib\net45\JavaScriptEngineSwitcher.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="JSPool, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2fc7775f73072640, processorArchitecture=MSIL">
-      <HintPath>..\packages\JSPool.4.0.0\lib\net45\JSPool.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="React.Core, Version=5.1.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
-      <HintPath>..\packages\React.Core.5.1.1\lib\net45\React.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="React.Web, Version=5.1.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
-      <HintPath>..\packages\React.Web.5.1.1\lib\net40\React.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="React.Web.Mvc4, Version=5.1.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
-      <HintPath>..\packages\React.Web.Mvc4.5.1.1\lib\net40\React.Web.Mvc4.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,8 +99,8 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -141,7 +119,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\ReactConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\KaupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -162,26 +139,13 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\EstateFav\css\style.css">
-      <DependentUpon>style.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\EstateFav\css\style.min.css">
-      <DependentUpon>style.css</DependentUpon>
-    </Content>
-    <Content Include="Content\EstateFav\css\style.scss" />
     <None Include="Content\EstateFav\EstateData.json" />
-    <Content Include="Content\EstateFav\js\RenderFav.jsx" />
-    <Content Include="Content\EstateFav\js\Render.jsx" />
-    <Content Include="Content\normalize.css" />
     <Content Include="Content\ReactTest\01\TweetInput.jsx" />
     <Content Include="Content\ReactTest\01\Tweet.jsx" />
     <Content Include="Content\ReactTest\01\Timeline.jsx" />
     <Content Include="Content\ReactTest\01\main.jsx" />
-    <Content Include="Content\EstateFav\js\RenderEstate.jsx" />
-    <Content Include="Content\ReactTest\02\Favorite.jsx" />
-    <Content Include="Content\ReactTest\03\Render.jsx" />
+    <Content Include="Content\EstateFav\js\Render.jsx" />
     <Content Include="Content\ReactTest\02\Render.jsx" />
-    <Content Include="Content\ress.css" />
     <Content Include="Content\Style.css">
       <DependentUpon>Style.scss</DependentUpon>
     </Content>
@@ -218,7 +182,6 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\ReactTest\02\list.json" />
-    <Content Include="Content\ReactTest\03\list.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -234,14 +197,6 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\react\react-dom-server.js" />
-    <Content Include="Scripts\react\react-dom-server.min.js" />
-    <Content Include="Scripts\react\react-dom.js" />
-    <Content Include="Scripts\react\react-dom.min.js" />
-    <Content Include="Scripts\react\react-with-addons.js" />
-    <Content Include="Scripts\react\react-with-addons.min.js" />
-    <Content Include="Scripts\react\react.js" />
-    <Content Include="Scripts\react\react.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -278,10 +233,10 @@
     <Content Include="Views\ReactTest\Index01.cshtml" />
     <Content Include="Views\EstateFav\Index.cshtml" />
     <Content Include="Views\ReactTest\Index02.cshtml" />
-    <Content Include="Views\ReactTest\Index03.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\EstateFav\css\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
