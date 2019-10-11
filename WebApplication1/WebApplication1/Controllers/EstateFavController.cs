@@ -15,7 +15,29 @@ namespace WebApplication1.Controllers
         {
             get
             {
-                return this.Session["FavoriteIDs"] as string[] ?? new string[] { };
+                return this.Session[this.FavoriteTitle] as string[] ?? new string[] { };
+            }
+        }
+
+        /// <summary>
+        /// お気に入り物件配列
+        /// </summary>
+        private string FavoriteTitle
+        {
+            get
+            {
+                return this.Session["FavoriteTitle"] as string ?? "Default";
+            }
+        }
+
+        /// <summary>
+        /// お気に入り物件配列
+        /// </summary>
+        private string[] FavoriteTitles
+        {
+            get
+            {
+                return this.Session["FavoriteTitles"] as string[] ?? new string[] { "Default" };
             }
         }
 
@@ -40,16 +62,35 @@ namespace WebApplication1.Controllers
         }
 
         // GET: ReactTest01
-        public ActionResult GetFavJson()
+        public ActionResult GetFavJson(string favoriteTitle)
         {
+            if (!string.IsNullOrEmpty(favoriteTitle))
+            {
+                this.Session["FavoriteTitle"] = favoriteTitle;
+
+                if (!this.FavoriteTitles.Contains(favoriteTitle))
+                {
+                    var favoriteTitles = this.FavoriteTitles.ToList();
+                    favoriteTitles.Add((string)favoriteTitle);
+                    this.Session["FavoriteTitles"] = favoriteTitles.ToArray();
+                }
+            }
+
             // お気に入りJsonを読み込み
             var estateData = new ViewModels.EstateData();
 
-            var model = new List<ViewModels.EstateData.Estate>();
+            var estates = new List<ViewModels.EstateData.Estate>();
             foreach (var favoriteID in this.FavoriteIDs)
             {
-                model.Add(estateData.Estates.SingleOrDefault(m => m.EstateID == favoriteID));
+                estates.Add(estateData.Estates.SingleOrDefault(m => m.EstateID == favoriteID));
             }
+
+            var model = new ViewModels.FavoriteList
+            {
+                Estates = estates,
+                Title = this.FavoriteTitle,
+                Titles = this.FavoriteTitles.ToList(),
+            };
 
             //response
             object obj = new { status = "OK", data = model };
@@ -59,7 +100,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: ReactTest01
-        public ActionResult ToggleFavJson(string id)
+        public ActionResult ToggleFavoriteEstate(string id)
         {
             // お気に入りJsonに追加
             var favoriteIDs = this.FavoriteIDs.ToList();
@@ -73,8 +114,33 @@ namespace WebApplication1.Controllers
                 favoriteIDs.Add(id);
             }
 
+            this.Session[this.FavoriteTitle] = favoriteIDs.ToArray();
 
-            this.Session["FavoriteIDs"] = favoriteIDs.ToArray();
+            //return
+            return RedirectToAction("GetFavJson");
+        }
+
+        // GET: ReactTest01
+        public ActionResult DeleteFavoriteTitle(string favoriteTitle)
+        {
+            // お気に入りJsonに追加
+            if (this.FavoriteTitles.Contains(favoriteTitle))
+            {
+                var favoriteTitles = this.FavoriteTitles.ToList();
+                favoriteTitles.Remove((string)favoriteTitle);
+                this.Session["FavoriteTitles"] = favoriteTitles.ToArray();
+
+                this.Session["FavoriteTitle"] = null;
+                this.Session[favoriteTitle] = null;
+            }
+
+            // Defaultをセット
+            if (!this.FavoriteTitles.Contains("Default"))
+            {
+                var favoriteTitles = this.FavoriteTitles.ToList();
+                favoriteTitles.Add("Default");
+                this.Session["FavoriteTitles"] = favoriteTitles.ToArray();
+            }
 
             //return
             return RedirectToAction("GetFavJson");
