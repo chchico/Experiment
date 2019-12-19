@@ -1,0 +1,82 @@
+﻿@*
+    <div id="app">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- ナビゲーションに router-link コンポーネントを使う -->
+                <!-- リンク先を `to` プロパティに指定します -->
+                <!-- デフォルトで `<router-link>` は `<a>` タグとして描画されます -->
+                <router-link to="/foo">Go to Foo</router-link>
+                <router-link to="/bar">Go to Bar</router-link>
+                <!-- ルートアウトレット -->
+                <!-- ルートとマッチしたコンポーネントがここへ描画されます -->
+                <router-view></router-view>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button v-on:click="addCount">Add 1</button>
+                <button v-on:click="delCount">Del 1</button>
+                <span>{{ count }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <my-component message="あいうえお"></my-component>
+                <button v-on:click="getData">Get milk!!</button>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>製品名</th>
+                            <th>種別</th>
+                            <th>価格</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in items">
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.typeCd | typeFormatter }}</td>
+                            <td>{{ item.price }}</td>
+                            <td><a v-bind:href="item.url">Edit</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/x-template" id="my-component">
+        <div>{{ message }}</div>
+    </script>
+
+    @section Scripts{
+        @Scripts.Render("~/bundles/vue")
+        @Scripts.Render("~/bundles/app")
+    }
+*@
+
+
+@{
+    ViewBag.Title = "Test";
+    Layout = "";    // レイアウトファイルを使用しない
+}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - マイ ASP.NET アプリケーション</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/app/vendor.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/app/main.css" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/javascript" src="~/Scripts/app/vendor.main.js"></script>
+    <script type="text/javascript" src="~/Scripts/app/main.js"></script>
+</body>
+</html>
+
